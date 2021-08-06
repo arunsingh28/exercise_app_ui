@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'constants.dart';
 import 'package:flutter_svg/svg.dart';
 
+import './widgets/category_card.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -30,6 +32,27 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
+      bottomNavigationBar: Container(
+        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 4),
+        height: 50,
+        color: Colors.white,
+        child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              BottomNavigation(
+                title: 'Today',
+                imgSrc: "assets/icons/calendar.svg",
+              ),
+              BottomNavigation(
+                title: 'All Exercises',
+                imgSrc: "assets/icons/pilates_gpdb.svg",
+              ),
+              BottomNavigation(
+                title: 'Setting',
+                imgSrc: "assets/icons/Settings.svg",
+              ),
+            ]),
+      ),
       body: Stack(
         children: <Widget>[
           Container(
@@ -117,58 +140,24 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-class CategoryCard extends StatelessWidget {
-  final String svgSrc;
+class BottomNavigation extends StatelessWidget {
   final String title;
-  final Function press;
-
-  const CategoryCard({
+  final String imgSrc;
+  final String press;
+  const BottomNavigation({
     Key key,
-    this.svgSrc,
     this.title,
+    this.imgSrc,
     this.press,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(13),
-      child: Container(
-        // padding: EdgeInsets.all(20),
-        decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-                offset: Offset(0, 17),
-                blurRadius: 17,
-                spreadRadius: -23,
-                color: kShadowColor)
-          ],
-          color: Colors.white,
-        ),
-        child: Material(
-          color: Colors.transparent,
-          child: InkWell(
-            onTap: press,
-            child: Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Column(
-                children: [
-                  Spacer(),
-                  SvgPicture.asset(svgSrc),
-                  Spacer(),
-                  Text(
-                    title,
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context)
-                        .textTheme
-                        .title
-                        .copyWith(fontSize: 15),
-                  )
-                ],
-              ),
-            ),
-          ),
-        ),
+    return GestureDetector(
+      onTap: () {},
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: <Widget>[SvgPicture.asset(imgSrc), Text(title)],
       ),
     );
   }
