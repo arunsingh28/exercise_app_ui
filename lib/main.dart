@@ -42,10 +42,12 @@ class HomeScreen extends StatelessWidget {
               BottomNavigation(
                 title: 'Today',
                 imgSrc: "assets/icons/calendar.svg",
+                // isActive: true,
               ),
               BottomNavigation(
                 title: 'All Exercises',
-                imgSrc: "assets/icons/.svg",
+                imgSrc: "assets/icons/gym.svg",
+                isActive: true,
               ),
               BottomNavigation(
                 title: 'Setting',
@@ -143,7 +145,7 @@ class HomeScreen extends StatelessWidget {
 class BottomNavigation extends StatelessWidget {
   final String title;
   final String imgSrc;
-  final String press;
+  final Function press;
   final bool isActive;
 
   const BottomNavigation({
@@ -157,10 +159,16 @@ class BottomNavigation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: press,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: <Widget>[SvgPicture.asset(imgSrc), Text(title)],
+        children: <Widget>[
+          SvgPicture.asset(imgSrc),
+          Text(
+            title,
+            style: TextStyle(color: isActive ? kActiveIconColor : kTextColor),
+          )
+        ],
       ),
     );
   }
