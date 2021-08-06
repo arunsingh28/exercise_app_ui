@@ -64,7 +64,17 @@ class HomeScreen extends StatelessWidget {
                         .textTheme
                         .headline4
                         .copyWith(fontWeight: FontWeight.w900),
-                  )
+                  ),
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 30, vertical: 5),
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(29.8)),
+                    child: TextField(
+                      decoration: InputDecoration(
+                          icon: SvgPicture.asset("assets/icons/search.svg")),
+                    ),
+                  ),
                 ],
               ),
             ),
