@@ -66,18 +66,78 @@ class HomeScreen extends StatelessWidget {
                         .copyWith(fontWeight: FontWeight.w900),
                   ),
                   Container(
+                    margin: EdgeInsets.symmetric(vertical: 30),
                     padding: EdgeInsets.symmetric(horizontal: 30, vertical: 5),
                     decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(29.8)),
                     child: TextField(
                       decoration: InputDecoration(
+                          hintText: "Search",
+                          border: InputBorder.none,
                           icon: SvgPicture.asset("assets/icons/search.svg")),
                     ),
                   ),
+                  Expanded(
+                      child: GridView.count(
+                    crossAxisCount: 2,
+                    childAspectRatio: .85,
+                    crossAxisSpacing: 20,
+                    mainAxisSpacing: 20,
+                    children: <Widget>[
+                      CategoryCard(
+                        title: "Diet Recommendation",
+                        svgSrc: "assets/icons/Hamburger.svg",
+                      ),
+                      CategoryCard(
+                        title: "Kegel Excrecises",
+                        svgSrc: "assets/icons/Excrecises.svg",
+                      ),
+                      CategoryCard(
+                        title: "Meditation",
+                        svgSrc: "assets/icons/Meditation.svg",
+                      ),
+                      CategoryCard(
+                        title: "Yoga",
+                        svgSrc: "assets/icons/yoga.svg",
+                      )
+                    ],
+                  ))
                 ],
               ),
             ),
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class CategoryCard extends StatelessWidget {
+  final String svgSrc;
+  final String title;
+
+  const CategoryCard({
+    Key key,
+    this.svgSrc,
+    this.title,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(20),
+      decoration: BoxDecoration(
+          color: Colors.white, borderRadius: BorderRadius.circular(13)),
+      child: Column(
+        children: [
+          Spacer(),
+          SvgPicture.asset(svgSrc),
+          Spacer(),
+          Text(
+            title,
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.title.copyWith(fontSize: 15),
           )
         ],
       ),
