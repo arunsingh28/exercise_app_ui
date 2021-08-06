@@ -51,7 +51,7 @@ class HomeScreen extends StatelessWidget {
                     alignment: Alignment.topRight,
                     child: Container(
                       alignment: Alignment.center,
-                      height: 52,
+                      height: 35,
                       width: 52,
                       decoration: BoxDecoration(
                           color: Color(0xfff2bea1), shape: BoxShape.circle),
@@ -88,18 +88,22 @@ class HomeScreen extends StatelessWidget {
                       CategoryCard(
                         title: "Diet Recommendation",
                         svgSrc: "assets/icons/Hamburger.svg",
+                        press: () => print("Tapped!"),
                       ),
                       CategoryCard(
                         title: "Kegel Excrecises",
                         svgSrc: "assets/icons/Excrecises.svg",
+                        press: () => print("Tapped!"),
                       ),
                       CategoryCard(
                         title: "Meditation",
                         svgSrc: "assets/icons/Meditation.svg",
+                        press: () => print("Tapped!"),
                       ),
                       CategoryCard(
                         title: "Yoga",
                         svgSrc: "assets/icons/yoga.svg",
+                        press: () => print("Tapped!"),
                       )
                     ],
                   ))
@@ -116,30 +120,55 @@ class HomeScreen extends StatelessWidget {
 class CategoryCard extends StatelessWidget {
   final String svgSrc;
   final String title;
+  final Function press;
 
   const CategoryCard({
     Key key,
     this.svgSrc,
     this.title,
+    this.press,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(20),
-      decoration: BoxDecoration(
-          color: Colors.white, borderRadius: BorderRadius.circular(13)),
-      child: Column(
-        children: [
-          Spacer(),
-          SvgPicture.asset(svgSrc),
-          Spacer(),
-          Text(
-            title,
-            textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.title.copyWith(fontSize: 15),
-          )
-        ],
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(13),
+      child: Container(
+        // padding: EdgeInsets.all(20),
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+                offset: Offset(0, 17),
+                blurRadius: 17,
+                spreadRadius: -23,
+                color: kShadowColor)
+          ],
+          color: Colors.white,
+        ),
+        child: Material(
+          color: Colors.transparent,
+          child: InkWell(
+            onTap: press,
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
+                children: [
+                  Spacer(),
+                  SvgPicture.asset(svgSrc),
+                  Spacer(),
+                  Text(
+                    title,
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context)
+                        .textTheme
+                        .title
+                        .copyWith(fontSize: 15),
+                  )
+                ],
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }
