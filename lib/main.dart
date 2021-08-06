@@ -45,7 +45,7 @@ class HomeScreen extends StatelessWidget {
               ),
               BottomNavigation(
                 title: 'All Exercises',
-                imgSrc: "assets/icons/pilates_gpdb.svg",
+                imgSrc: "assets/icons/.svg",
               ),
               BottomNavigation(
                 title: 'Setting',
@@ -144,11 +144,14 @@ class BottomNavigation extends StatelessWidget {
   final String title;
   final String imgSrc;
   final String press;
+  final bool isActive;
+
   const BottomNavigation({
     Key key,
     this.title,
     this.imgSrc,
     this.press,
+    this.isActive = false,
   }) : super(key: key);
 
   @override
